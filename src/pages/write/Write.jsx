@@ -30,7 +30,7 @@ export default function Write() {
           />
         </div>
         <button className="writeSubmit" type="submit" onClick="send">
-          Submit
+          Submitt
         </button>
       </form>
     </div>
