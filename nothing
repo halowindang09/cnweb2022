@@ -1,0 +1,18 @@
+[33mcommit 846aacdef8fb1e9cf9e9d66ec410b1743f2855a2[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: nghiavt3 <nghia64582@gmail.com>
+Date:   Fri Jan 7 11:06:38 2022 +0700
+
+    git commit -m "nghia1"
+
+[1mdiff --git a/src/components/singlePost/SinglePost.jsx b/src/components/singlePost/SinglePost.jsx[m
+[1mindex b3f560d..4eafd9c 100644[m
+[1m--- a/src/components/singlePost/SinglePost.jsx[m
+[1m+++ b/src/components/singlePost/SinglePost.jsx[m
+[36m@@ -29,6 +29,7 @@[m [mexport default function SinglePost() {[m
+           <span>1 day ago</span>[m
+         </div>[m
+         <p className="singlePostDesc">[m
+[32m+[m[41m          [m
+           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error[m
+           quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit![m
+           Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi[m

@@ -29,10 +29,13 @@ export default function Write() {
             autoFocus={true}
           />
         </div>
-        <button className="writeSubmit" type="submit">
-          Publish
+        <button className="writeSubmit" type="submit" onClick="send">
+          Submit
         </button>
       </form>
     </div>
   );
+}
+function send() {
+  console.log(1);
 }
