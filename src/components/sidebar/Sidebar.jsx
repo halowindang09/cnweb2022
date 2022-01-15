@@ -7,12 +7,14 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
         <img
-          src="https://themegoods-cdn-pzbycso8wng.stackpathdns.com/grandblog/demo/wp-content/uploads/2015/11/aboutme.jpg"
+          src="https://img1.kpopmap.com/2019/04/myteen-profile-junseop.jpg"
           alt=""
         />
         <p>
-          Laboris sunt aute cupidatat velit magna velit ullamco dolore mollit
-          amet ex esse.Sunt eu ut nostrud id quis proident.
+          Chào tất cả mọi người mình tên là Nguyễn Nam A. Chào mừng bạn đến với blog của mình. 
+          Đây là nơi mình thường xuyên chia sẻ về những câu chuyện nho nhỏ trong đời sống thường ngày của mình.
+           Mình tin rằng, hạnh phúc đến từ những điều giản dị nhất.
+            Hi vọng bạn sẽ tìm thấy được sự bình yên và một chút niềm vui khi đọc blog của mình.
         </p>
       </div>
       <div className="sidebarItem">
@@ -62,3 +64,7 @@ export default function Sidebar() {
     </div>
   );
 }
+
+// Chỉnh sửa ngắn cho để hiện thị những các phân loại.
+// 1 tác giả nên không cần link bài viết cho user
+// hiển thị bài viết có ở  cat nào.

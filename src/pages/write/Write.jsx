@@ -20,6 +20,9 @@ export default function Write() {
             type="text"
             autoFocus={true}
           />
+          <button className="writeSubmit" type="submit" onClick="send">
+            SUBMIT
+          </button>
         </div>
         <div className="writeFormGroup">
           <textarea
@@ -29,9 +32,6 @@ export default function Write() {
             autoFocus={true}
           />
         </div>
-        <button className="writeSubmit" type="submit" onClick="send">
-          Submitt
-        </button>
       </form>
     </div>
   );

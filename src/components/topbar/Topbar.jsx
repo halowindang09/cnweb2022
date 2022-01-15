@@ -25,8 +25,8 @@ export default function Topbar(props) {
           <li className="topListItem"><Link className="link" to="/contact">
               CONTACT
             </Link> </li>
-          <li className="topListItem"><Link className="link" to="/blog">
-              BLOG
+          <li className="topListItem"><Link className="link" to="/write">
+              WRITE
             </Link> </li>
         </ul>
       </div>

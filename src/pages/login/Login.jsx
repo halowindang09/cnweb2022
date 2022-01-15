@@ -12,7 +12,7 @@ export default function Login(props) {
         <input className="loginInput" type="password" placeholder="Enter your password..." />
         <button className="loginButton" onClick={()=>setCurrentUser(true)}>Login</button>
       </form>
-        <button className="loginRegisterButton">Register</button>
+        
     </div>
   );
 }

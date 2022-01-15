@@ -24,7 +24,7 @@ export default function Post({img,content}) {
         </div>
         <span className="postTitle">
           <Link to="/post/abc" className="link">
-            Lorem ipsum dolor sit amet
+            Những bản nhạc thư dãn để bắt đầu 1 ngày mới
           </Link>
         </span>
         <hr />
@@ -37,6 +37,9 @@ export default function Post({img,content}) {
         atque, exercitationem quibusdam, reiciendis odio laboriosam? */}
         {content}
       </p>
+     
     </div>
+    
   );
 }
+// Hien thi trang bai viet
