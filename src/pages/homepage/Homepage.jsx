@@ -9,16 +9,16 @@ import { useEffect, useState } from "react";
 export default function Homepage() {
   // const location = useLocation();
   // console.log(location);
-  const [posts, setPosts] = useState([]);
-  const { search } = useLocation();
+  // const [posts, setPosts] = useState([]);
+  // const { search } = useLocation();
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const res = await axios.get("/posts" + search);
-      setPosts(res.data);
-    };
-    fetchPosts();
-  }, [search]);
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     const res = await axios.get("/" + search);
+  //     setPosts(res.data);
+  //   };
+  //   fetchPosts();
+  // }, [search]);
   return (
     <>
       <Header />

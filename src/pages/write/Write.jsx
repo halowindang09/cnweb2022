@@ -1,4 +1,26 @@
 import "./write.css";
+import { requestMgr } from "../../RequestMgr";
+
+function sendAddPost() {
+//   axios({
+//     url : process.env.REACT_APP_API_URL,
+//     method : "post",
+//     data : {
+//         "cmd" : 2,
+//         "excerpt" : document.getElementById("excerptInput"),
+//         "title" : document.getElementById("writeInput"),
+//         "content" : document.getElementById("writeInput writeText"),
+//     }
+// }).then(function (response) {
+//     console.log(response);
+// });
+  console.log(123);
+  let excerpt = "abc";
+  let title = "abc";
+  let content = "abc";
+  requestMgr.sendAddPost(excerpt, title, content);
+}
+
 
 export default function Write() {
   return (
@@ -20,7 +42,13 @@ export default function Write() {
             type="text"
             autoFocus={true}
           />
-          <button className="writeSubmit" type="submit" onClick="send">
+          <input
+            className="writeInput"
+            placeholder="Excerpt"
+            type="text"
+            autoFocus={true}
+          />
+          <button id="btnSubmit" className="writeSubmit" type="submit" onClick={sendAddPost}>
             SUBMIT
           </button>
         </div>
@@ -35,7 +63,4 @@ export default function Write() {
       </form>
     </div>
   );
-}
-function send() {
-  console.log(1);
 }
