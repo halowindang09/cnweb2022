@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import "./write.css";
 import { requestMgr } from "../../RequestMgr";
 
@@ -20,9 +21,15 @@ function sendAddPost() {
   let content = "abc";
   requestMgr.sendAddPost(excerpt, title, content);
 }
-
-
 export default function Write() {
+  const [imgUrl, setImgUrl] = useState(null);
+  const handleOnChange = e => {
+      const file = e.target.files[0];
+      console.log(file)
+      if (file) {
+        setImgUrl(URL.createObjectURL(file));
+      }
+  };
   return (
     <div className="write">
       <img
@@ -35,7 +42,7 @@ export default function Write() {
           <label htmlFor="fileInput">
             <i className="writeIcon fas fa-plus"></i>
           </label>
-          <input id="fileInput" type="file" style={{ display: "none" }} />
+          <input id="fileInput" multiple="false" type="file" style={{ display: "none" }} onChange={handleOnChange} />
           <input
             className="writeInput"
             placeholder="Title"
@@ -52,7 +59,15 @@ export default function Write() {
             SUBMIT
           </button>
         </div>
-        <div className="writeFormGroup">
+        { imgUrl && (
+          <div className="image_preview">
+            <img src={imgUrl} />
+          </div>
+        )}
+        <div className="writeFormGroup content">
+          <div className="write_text_header">
+            Nội dung
+          </div>
           <textarea
             className="writeInput writeText"
             placeholder="Tell your story..."

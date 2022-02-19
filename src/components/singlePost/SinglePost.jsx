@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import "./singlePost.css";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { DeleteIcon, GrayStar, YellowStar } from '../../icon';
 
 export default function SinglePost() {
   const [listComment, setListComment] = useState([]);
@@ -21,6 +22,7 @@ export default function SinglePost() {
       validateText(username) && validateText(email) &&  validateText(content)  
     ) {
       setListComment([...listComment, {
+        id: listComment.length,
         username,
         email,
         content
@@ -48,6 +50,26 @@ export default function SinglePost() {
       if (regex.test(text)) return false;
     }
     return true;
+  };
+  const deleteComment = (e, index) => {
+    setListComment(listComment.filter((item, _index) => index !== _index));
+  };
+
+  const [stars, setStars] = useState([false, false, false, false, false]);
+  const [appreciateNum, setAppreciateNum] = useState(2000);
+
+  const formatNum = (num) => {
+    if (num < 1000 && num > 0) return `${num}`;
+    else if (num > 1000) return `${num/1000}k`;
+    else return null;
+  }
+  const handleClickStar = (e, index) => {
+    if (index === 0 && stars[0] && !stars[1]) setStars([false, false, false, false, false]) // click khi đang ở 1 sao
+    if (index === 0 && stars[0] && stars[1]) setStars([true, false, false, false, false]); // click khi đang ở 2 sao trở lên
+    if (index === 1) setStars([true, true, false, false, false]);
+    if (index === 2) setStars([true, true, true, false, false]);
+    if (index === 3) setStars([true, true, true, true, false]);
+    if (index === 4) setStars([true, true, true, true, true]);
   }
   return (
     <div className="singlePost">
@@ -57,6 +79,18 @@ export default function SinglePost() {
           src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
           alt=""
         />
+        <div className="stars">
+          {stars.map((item, index) => (
+            <div className="star" key={`star-${index}`} onClick={e => handleClickStar(e, index)}>
+              { item ? <YellowStar /> : <GrayStar />}
+            </div>
+          ))}
+        </div>
+        <div style={{ fontSize: '12px', marginLeft: '5px', fontFamily: 'monospace'}}>
+          { appreciateNum > 0 && (
+            formatNum(appreciateNum).concat(' đánh giá')
+          )}
+        </div>
         <h1 className="singlePostTitle">
           Lorem ipsum dolor
           <div className="singlePostEdit">
@@ -127,6 +161,9 @@ export default function SinglePost() {
                     {comment.content}
                   </div>
                   <div className="line"></div>
+                  <div className="delete_comment" onClick={e => deleteComment(e, index)}>
+                    <DeleteIcon />
+                  </div>
                 </div>
               );
            })

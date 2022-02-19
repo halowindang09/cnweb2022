@@ -114,6 +114,7 @@ textarea {
   padding: 20px;
 }
 .comment {
+  position: relative;
   margin-bottom: 20px;
 }
 .comment_email {
@@ -136,4 +137,22 @@ textarea {
 .line {
   margin-top: 10px;
   border-top: 1px solid rgb(224, 224, 224);
+}
+.delete_comment {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.delete_comment {
+  display: none;
+  cursor: pointer;
+}
+.comment:hover .delete_comment{
+  display: block;
+}
+.stars {
+  display: flex;
+}
+.star {
+  cursor: pointer;
 }
