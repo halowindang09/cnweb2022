@@ -6,39 +6,50 @@ export default function Topbar(props) {
   return (
   <div className="top">
       <div className="topLeft">
-        <i className="topIcon fab fa-facebook-square"></i>
-        <i className="topIcon fab fa-instagram-square"></i>
-        <i className="topIcon fab fa-pinterest-square"></i>
-        <i className="topIcon fab fa-twitter-square"></i>
-      </div>
-      <div className="topCenter">
         <ul className="topList">
-          <li className="topListItem">
-            <Link className="link" to="/">
-              HOME
-            </Link>
-          </li>
-          <li className="topListItem"><Link className="link" to="/about">
-              ABOUT ME
-            </Link>
-          </li>
-          <li className="topListItem"><Link className="link" to="/contact">
-              CONTACT
-            </Link> </li>
-          <li className="topListItem"><Link className="link" to="/write">
-              WRITE
-            </Link> </li>
-        </ul>
+            <li className="topListItem">
+              <Link className="link" to="/">
+                HOME
+              </Link>
+            </li>
+            <li className="topListItem"><Link className="link" to="/about">
+                ABOUT ME
+              </Link>
+            </li>
+            <li className="topListItem"><Link className="link" to="/contact">
+                CONTACT
+              </Link> </li>
+            <li className="topListItem"><Link className="link" to="/write">
+                WRITE
+              </Link> </li>
+          </ul>
       </div>
-      <div className="topRight">
-    
-            <Link className="link" to="/login" onClick={()=>setCurrentUser(false)}>
-              {currentUser ? "LOGOUT" : "LOGIN" }
-            </Link>
-            <i className="topSearchIcon fas fa-search"></i>
-        
-          </div>
+      {/* <div className="topCenter">
 
-          </div>
+      </div> */}
+      <div className="topRight"> 
+        {
+          currentUser && (
+            <Link className="link" to="/profile">
+              <div className="profile">
+
+              </div>
+            </Link>
+          )
+        }  
+        <Link className="link link_login" to="/login" onClick={()=>setCurrentUser(false)}>
+          {currentUser ? "LOGOUT" : "LOGIN" }
+        </Link>
+        <div style={{width: '10px'}}></div>
+        {
+          !currentUser && (
+            <Link className="link link_register" to="/register" onClick={()=>setCurrentUser(false)}>
+              REGISTER
+            </Link>
+          )
+        }
+        <i className="topSearchIcon fas fa-search"></i>
+      </div>
+    </div>
   );
 }

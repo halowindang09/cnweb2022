@@ -1,7 +1,50 @@
+import React from 'react';
 import { Link } from "react-router-dom";
+import { useState, useRef, useEffect } from 'react';
 import "./singlePost.css";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SinglePost() {
+  const [listComment, setListComment] = useState([]);
+  const [username, setUsername] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [content, setContent] = useState(null);
+  const [error, setError] = useState(false);
+
+  const contentRef = useRef(null);
+  const emailRef = useRef(null);
+  const usernameRef = useRef(null);
+  
+  const handleOnClick = e => {
+    if (validateText(username) && validateText(email) &&  validateText(content)) {
+      setListComment([...listComment, {
+        username,
+        email,
+        content
+      }]);
+      contentRef.current.value = null;
+      emailRef.current.value = null;
+      usernameRef.current.value = null;
+      setError(false);
+    } else {
+      setError(true);
+    }
+  }
+  const handleOnChange = (e, type) => {
+    const value = e.target.value;
+    if (type === 'email') setEmail(value);
+    if (type === 'username') setUsername(value);
+    if (type === 'content') setContent(value);
+  }
+  const array = ['', 'fuck', ]; // them vao day
+  const validateText = text => {
+    for(let element of array) {
+      const regex = new RegExp(element, 'g');
+      if (regex.test(text)) return false;
+    }
+    return true;
+  }
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
@@ -60,15 +103,45 @@ export default function SinglePost() {
           a odit modi eos! Lorem, ipsum dolor sit amet consectetur.
         </p>
       </div>
+      <div className="comments_header">
+        COMMENTS
+      </div>
+      <div className="comments">
+         { listComment && (
+           listComment.map((comment, index) => {
+              return (
+                <div className="comment" key={`comment-${index}`}>
+                  <div className="comment_username">
+                    <span style={{ borderBottom: '1px solid #dd9933', paddingBottom: '1px', fontWeight: '600'}}>
+                      {comment.username}</span> <span style={{fontSize: '12px'}}>says:
+                    </span>
+                  </div>
+                  <div className="comment_email">
+                    {comment.email}
+                  </div>
+                  <div className="comment_content">
+                    {comment.content}
+                  </div>
+                  <div className="line"></div>
+                </div>
+              );
+           })
+         )}
+      </div>
       <h3 className="comment-reply-title">Leave a Reply </h3>
       <div className="single-post-cmt">
         <form className="single-post-cmt-form">
-          <textarea id="cmt" placeholder="Write your comment here" />
+          <textarea ref={contentRef} id="cmt" placeholder="Write your comment here" onChange={e => handleOnChange(e, 'content')}/>
           <label htmlFor="name">Name</label>
-          <input type="text" id="name" />
+          <input ref={usernameRef} type="text" id="name" onChange={e => handleOnChange(e, 'username')}/>
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" />
-          <button>Send</button>
+          <input ref={emailRef} type="email" id="email" onChange={e => handleOnChange(e, 'email')}/>
+          { error && (
+            <div style={{ fontSize: '15px', fontStyle: 'italic', color: 'red', margin: '2px 0px 10px 0px'}}>
+              Comment không hợp lệ
+            </div>
+          )}
+          <button type="button" onClick={handleOnClick}>Send</button>
         </form>
       </div>
       {/* <form action></form>  */}

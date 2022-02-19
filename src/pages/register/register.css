@@ -1,0 +1,64 @@
+.register {
+    height: calc(100vh - 50px);
+    width: 100%;
+    background: linear-gradient( rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../../img/test1\ \(2\).jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form_register {
+    width: 400px;
+    height: 400px;
+    /* background-color: white; */
+    border-radius: 5px;
+}
+.register_label {
+    font-weight: 500;
+    font-size: 48px;
+    margin-bottom: 50px;
+    text-shadow: 0.5px 0.5px black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.main_form {
+    margin: auto;
+    width: 250px;
+    padding: 5px;
+}
+
+input {
+    width: 240px;
+    height: 30px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid rgb(131, 131, 131);
+    /* border: none; */
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgb(247, 247, 247);
+}
+input:focus {
+    border: 1px solid #747474;
+}
+  
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+.btn_register {
+    border: none;
+    width: 260px;
+    height: 40px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-top: 15px;
+    background-color: lightcoral;
+    color: white;
+}

@@ -66,6 +66,7 @@
 .single-post-cmt {
   flex-grow: 1;
   margin-top: 30px;
+  margin-left: 20px;
 }
 
 .single-post-cmt-form {
@@ -85,6 +86,7 @@ textarea {
 .single-post-cmt-form textarea {
   height: 100px;
   border-radius: 5px;
+  padding: 10px;
 }
 
 .single-post-cmt-form button {
@@ -100,4 +102,38 @@ textarea {
   margin-right: 2px;
   flex-grow: 1;
   justify-content: center;
+}
+
+.comments_header {
+  font-weight: 600;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.comments {
+  padding: 20px;
+}
+.comment {
+  margin-bottom: 20px;
+}
+.comment_email {
+  font-size: 12px;
+  font-style: italic;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+.comment_username {
+  /* color: blue; */
+  font-size: 15px;
+  text-decoration: #dd9933;
+}
+.comment_content {
+  margin-left: 10px;
+}
+.comment-reply-title {
+  margin-left: 20px;
+}
+.line {
+  margin-top: 10px;
+  border-top: 1px solid rgb(224, 224, 224);
 }
