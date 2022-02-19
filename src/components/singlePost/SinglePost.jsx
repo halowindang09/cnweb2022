@@ -17,7 +17,9 @@ export default function SinglePost() {
   const usernameRef = useRef(null);
   
   const handleOnClick = e => {
-    if (validateText(username) && validateText(email) &&  validateText(content)) {
+    if (username && email && content &&
+      validateText(username) && validateText(email) &&  validateText(content)  
+    ) {
       setListComment([...listComment, {
         username,
         email,
@@ -26,18 +28,20 @@ export default function SinglePost() {
       contentRef.current.value = null;
       emailRef.current.value = null;
       usernameRef.current.value = null;
+      setEmail(null);
+      setUsername(null);
+      setContent(null);
       setError(false);
     } else {
-      setError(true);
-    }
-  }
+        setError(true);
+    }};
   const handleOnChange = (e, type) => {
     const value = e.target.value;
     if (type === 'email') setEmail(value);
     if (type === 'username') setUsername(value);
     if (type === 'content') setContent(value);
   }
-  const array = ['', 'fuck', ]; // them vao day
+  const array = ['fuck', ]; // them vao day
   const validateText = text => {
     for(let element of array) {
       const regex = new RegExp(element, 'g');
