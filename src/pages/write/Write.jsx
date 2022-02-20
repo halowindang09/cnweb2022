@@ -50,7 +50,7 @@ export default function Write() {
         alt=""
       />
       <form className="writeForm">
-        <div className="writeFormGroup">
+        <div className="writeFormGroup writeFormGroup_responsive">
           <label htmlFor="fileInput">
             <i className="writeIcon fas fa-plus"></i>
           </label>

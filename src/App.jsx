@@ -36,9 +36,9 @@ function App() {
             <About/>
         </Route>
       </Switch>
-      { window.location.pathname !== '/login' && window.location.pathname !== '/register' && (
+      {/* { window.location.pathname !== '/login' && window.location.pathname !== '/register' && ( */}
         <Footer />
-      )}
+      {/* )} */}
     </Router>
   );
 }

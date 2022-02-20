@@ -8,5 +8,10 @@ html, body {
     font-family: 'Zen Antique', serif !important; */
 }
 #root {
-    min-width: 990px;
+    /* min-width: 990px; */
+}
+@media only screen and (max-width: 700px) {
+    .footer {
+        display: none;
+    }
 }

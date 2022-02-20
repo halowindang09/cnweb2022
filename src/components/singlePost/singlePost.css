@@ -1,5 +1,6 @@
 .singlePost {
   flex: 9;
+  width: 100%;
 }
 
 .singlePostWrapper {
@@ -116,6 +117,7 @@ textarea {
 .comment {
   position: relative;
   margin-bottom: 20px;
+  word-break: break-all;
 }
 .comment_email {
   font-size: 12px;
@@ -170,6 +172,6 @@ textarea {
   margin-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
-  width: 600px;
+  width: 50%;
   height: auto;
 }

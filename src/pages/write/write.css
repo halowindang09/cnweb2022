@@ -26,6 +26,7 @@
   align-items: center;
   flex-grow: 1;
   padding: 0 10px;
+  margin-top: 10px;
 }
 
 .writeIcon {
@@ -153,4 +154,10 @@
 
 .close_icon > svg {
   vertical-align: middle;
+}
+
+@media only screen and (max-width: 1050px) {
+  .writeFormGroup_responsive {
+    flex-direction: column !important;
+  }
 }
