@@ -35,6 +35,24 @@ export default function SinglePost() {
       setUsername(null);
       setContent(null);
       setError(false);
+      // AJAX
+      const request = new XMLHttpRequest();
+      const url = ''; // nhập api ở đây
+      request.open('POST', url, true);
+      request.setRequestHeader("Content-Type", "application/json");
+      const data = JSON.stringify(''); // truyền dữ liệu vào đây
+      request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+          if (request.status === 200) {
+            // thành công . Khi thành công mình làm gì tiếp theo thì làm ở đây
+          }
+          else {
+            // thất bại thì cần làm gì ??
+          }
+        }
+      };
+      request.send(data);
+    
     } else {
         setError(true);
     }};
