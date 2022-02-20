@@ -12,6 +12,7 @@ export default function SinglePost() {
   const [email, setEmail] = useState(null);
   const [content, setContent] = useState(null);
   const [error, setError] = useState(false);
+  const tags = [{ content: 'Ẩm thực'}, { content: 'Thực phẩm'}];
 
   const contentRef = useRef(null);
   const emailRef = useRef(null);
@@ -64,8 +65,8 @@ export default function SinglePost() {
     else return null;
   }
   const handleClickStar = (e, index) => {
-    if (index === 0 && stars[0] && !stars[1]) setStars([false, false, false, false, false]) // click khi đang ở 1 sao
-    if (index === 0 && stars[0] && stars[1]) setStars([true, false, false, false, false]); // click khi đang ở 2 sao trở lên
+    if (index === 0 && stars[0] && !stars[1]) setStars([false, false, false, false, false]) // click sao thứ 1 khi đang ở 1 sao thì sẽ trở về chưa đánh giá
+    if (index === 0 && stars[0] && stars[1]) setStars([true, false, false, false, false]); // click sao thứ 1 khi đang ở 2 sao trở lên sẽ trở về 1 sao
     if (index === 1) setStars([true, true, false, false, false]);
     if (index === 2) setStars([true, true, true, false, false]);
     if (index === 3) setStars([true, true, true, true, false]);
@@ -79,6 +80,15 @@ export default function SinglePost() {
           src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
           alt=""
         />
+        <div className="tags_list">
+          { tags && tags.map((item, index) => {
+            return (
+              <div className="element_tag" key={`tag-${index}`}>
+                {item.content}
+              </div>
+            );
+          })}
+        </div>
         <div className="stars">
           {stars.map((item, index) => (
             <div className="star" key={`star-${index}`} onClick={e => handleClickStar(e, index)}>

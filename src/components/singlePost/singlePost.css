@@ -156,3 +156,20 @@ textarea {
 .star {
   cursor: pointer;
 }
+.element_tag {
+  border: 1px solid rgb(61, 102, 190);
+  border-radius: 5px;
+  min-width: 50px;
+  font-size: 13px;
+  padding: 5px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.tags_list {
+  margin-left: 0 !important;
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 600px;
+  height: auto;
+}

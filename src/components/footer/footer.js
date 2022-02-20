@@ -6,7 +6,7 @@ export const Footer = () => {
     return (
         <div className="footer">
             <div className="footer_first">
-                <div className="footer_element tag">
+                <div className="footer_element">
                     <div className='label_element'>
                         <div className="link_element">
                             <a href="#">TAGS</a>

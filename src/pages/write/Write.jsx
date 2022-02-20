@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import "./write.css";
 import { requestMgr } from "../../RequestMgr";
+import { CloseIcon } from '../../icon';
 
 function sendAddPost() {
 //   axios({
@@ -30,6 +31,17 @@ export default function Write() {
         setImgUrl(URL.createObjectURL(file));
       }
   };
+  const tagInput = useRef(null);
+  const [tags, setTags] = useState([]);
+  const deleteTag = (e, index) => {
+    setTags(tags.filter((item, _index) => _index !== index));
+  }
+  const addTag = () => {
+    if (tagInput && tagInput.current && tagInput.current.value) {
+      setTags([...tags, { content: tagInput.current.value}]);
+      tagInput.current.value = '';
+    }
+  }
   return (
     <div className="write">
       <img
@@ -61,9 +73,31 @@ export default function Write() {
         </div>
         { imgUrl && (
           <div className="image_preview">
-            <img src={imgUrl} />
+            <img src={imgUrl} alt="img_post"/>
           </div>
         )}
+        <div className="tags">
+          <div>
+            Tags
+          </div>
+          <div className="add_tag">
+            <input type="text" ref={tagInput} />
+            <button type="button" onClick={addTag}>Add</button>
+          </div>
+          <div className="tag_list">
+            { tags && tags.map((item, index) => {
+
+              return (
+                <div className="tag" key={`tag-${index}`}>
+                  {item.content}
+                  <div className="close_icon" onClick={e => deleteTag(e, index)}>
+                    <CloseIcon />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
         <div className="writeFormGroup content">
           <div className="write_text_header">
             Nội dung

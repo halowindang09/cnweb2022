@@ -106,3 +106,51 @@
   margin-top: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.add_tag > input {
+  height: 15px;
+  width: 150px;
+}
+.add_tag > button {
+  margin-left: 20px;
+  height: 35px;
+  width: 80px;
+  border: none;
+  padding: 0 10px;
+  background-color: #c4c4c4;
+  border-radius: 5px;
+  /* padding: 10px; */
+}
+.tags {
+  margin-left: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tag_list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+  height: auto;
+}
+.tag {
+  border: 1px solid rgb(61, 102, 190);
+  border-radius: 5px;
+  min-width: 50px;
+  font-size: 13px;
+  padding: 5px;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.close_icon {
+  height: 100%;
+  cursor: pointer;
+  margin-left: 2px;
+}
+
+.close_icon > svg {
+  vertical-align: middle;
+}
