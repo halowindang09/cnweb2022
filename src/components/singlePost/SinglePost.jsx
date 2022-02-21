@@ -6,13 +6,12 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { DeleteIcon, GrayStar, YellowStar } from '../../icon';
 
-export default function SinglePost() {
+export default function SinglePost({id, data}) {
   const [listComment, setListComment] = useState([]);
   const [username, setUsername] = useState(null);
   const [email, setEmail] = useState(null);
   const [content, setContent] = useState(null);
   const [error, setError] = useState(false);
-  const tags = [{ content: 'Ẩm thực'}, { content: 'Thực phẩm'}];
 
   const contentRef = useRef(null);
   const emailRef = useRef(null);
@@ -98,29 +97,8 @@ export default function SinglePost() {
           src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
           alt=""
         />
-        <div className="tags_list">
-          { tags && tags.map((item, index) => {
-            return (
-              <div className="element_tag" key={`tag-${index}`}>
-                {item.content}
-              </div>
-            );
-          })}
-        </div>
-        <div className="stars">
-          {stars.map((item, index) => (
-            <div className="star" key={`star-${index}`} onClick={e => handleClickStar(e, index)}>
-              { item ? <YellowStar /> : <GrayStar />}
-            </div>
-          ))}
-        </div>
-        <div style={{ fontSize: '12px', marginLeft: '5px', fontFamily: 'monospace'}}>
-          { appreciateNum > 0 && (
-            formatNum(appreciateNum).concat(' đánh giá')
-          )}
-        </div>
         <h1 className="singlePostTitle">
-          Lorem ipsum dolor
+          {data.title}
           <div className="singlePostEdit">
             <i className="singlePostIcon fas fa-tags"></i>
             <i className="singlePostIcon far fa-edit"></i>
@@ -139,35 +117,32 @@ export default function SinglePost() {
           <span>1 day ago</span>
         </div>
         <p className="singlePostDesc">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-          quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-          Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-          eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-          error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-          impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-          odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-          iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-          a odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-          iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-          a odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-          iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-          a odit modi eos!
-          <br />
-          <br />
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-          quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-          Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-          eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-          error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-          impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-          odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-          iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-          a odit modi eos! Lorem, ipsum dolor sit amet consectetur.
+          {data.content}
         </p>
+      </div>
+      <div className="tag_icon">
+        <i className="singlePostIcon fas fa-tags"></i>
+      </div>
+      <div className="tags_list">
+        { data.tags && data.tags.map((item, index) => {
+          return (
+            <div className="element_tag" key={`tag-${index}`}>
+              {item}
+            </div>
+          );
+        })}
+      </div>
+      <div className="stars">
+        {stars.map((item, index) => (
+          <div className="star" key={`star-${index}`} onClick={e => handleClickStar(e, index)}>
+            { item ? <YellowStar /> : <GrayStar />}
+          </div>
+        ))}
+      </div>
+      <div style={{ fontSize: '12px', marginLeft: '20px', marginBottom: '20px', fontFamily: 'monospace'}}>
+        { appreciateNum > 0 && (
+          formatNum(appreciateNum).concat(' đánh giá')
+        )}
       </div>
       <div className="comments_header">
         COMMENTS

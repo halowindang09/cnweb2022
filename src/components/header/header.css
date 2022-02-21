@@ -28,7 +28,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
 .headerTitles > span {
-  font-family: 'Redressed', cursive;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 32px;
   margin-bottom: 10px;
 }

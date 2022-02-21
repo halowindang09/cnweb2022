@@ -2,8 +2,11 @@
   padding-top: 50px;
   display: flex ;
   flex-direction: column;
+  /* position: relative; */
 }
-
+.writeForm > label {
+  width: 160px;
+}
 .writeImg {
   /* margin-left: 150px; */
   width: 100%;
@@ -61,30 +64,20 @@
 
 .writeText {
   /* width: 70vw; */
-  height: 100vh;
+  min-height: 400px;
+  max-height: 100vh;
   font-family: inherit;
   font-size: 20px;
   /* border: 1px solid #c4c4c4; */
   margin-top: 10px;
 }
+.writeInput {
+  width: 98%;
+  padding: 15px 5px;
+}
 
 .writeSubmit {
-  /* position: absolute;
-  top: 20px;
-  right: 50px; */
-  /* color: white; */
-  padding: 7px;
-  border: none;
-  border-radius: 3px;
-  font-size: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  align-self: center;
-  color: white;
-  background-color: rgb(0,0,0,0.5);
-  margin-right: 2px;
+
 }
 
 .image_preview {
@@ -160,4 +153,26 @@
   .writeFormGroup_responsive {
     flex-direction: column !important;
   }
+}
+
+.add_image {
+  display: flex;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  align-items: center;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+.add_image > i {
+  margin-left: 20px;
+}
+#btnSubmit {
+  float: right;
+  margin-right: 50px;
+  width: 150px;
+  height: 40px;
+  background-color: rgb(21, 21, 255);
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+  border: none;
 }

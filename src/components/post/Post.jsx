@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import "./post.css";
 
-export default function Post({img,content}) {
+export default function Post({key, img, item}) {
   return (
-    <div className="post">
+    <div className="post" key={key}>
       <img
         className="postImg"
         src={img}
@@ -11,32 +11,33 @@ export default function Post({img,content}) {
       />
       <div className="postInfo">
         <div className="postCats">
-          <span className="postCat">
-            <Link className="link" to="/posts?cat=Music">
-              Music
-            </Link>
-          </span>
-          <span className="postCat">
-            <Link className="link" to="/posts?cat=Music">
-              Life
-            </Link>
-          </span>
+          {
+            item.tags && item.tags.map((tag, _index) => {
+
+              return (
+                <span className="postCat" key={`tag-${_index}`}>
+                  <Link className="link" to="/posts?cat=Music">
+                    {tag}
+                  </Link>
+              </span>
+              );
+            })
+          }
         </div>
         <span className="postTitle">
-          <Link to="/post/abc" className="link">
-            Những bản nhạc thư dãn để bắt đầu 1 ngày mới
+          <Link to={{
+            pathname: `/post/${item.postId}`,
+            state: item
+          }} className="link">
+            {item.title}
           </Link>
         </span>
         <hr />
         <span className="postDate">1 hour ago</span>
       </div>
-      <p className="postDesc">
-        {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
-        officia architecto deserunt deleniti? Labore ipsum aspernatur magnam
-        fugiat, reprehenderit praesentium blanditiis quos cupiditate ratione
-        atque, exercitationem quibusdam, reiciendis odio laboriosam? */}
-        {content}
-      </p>
+      {/* <p className="postDesc">
+        {item.content}
+      </p> */}
      
     </div>
     

@@ -20,9 +20,9 @@ export default function Topbar(props) {
                   ABOUT ME
                 </Link>
               </li>
-              <li className="topListItem"><Link className="link" to="/contact">
+              {/* <li className="topListItem"><Link className="link" to="/contact">
                   CONTACT
-                </Link> </li>
+                </Link> </li> */}
               <li className="topListItem"><Link className="link" to="/write">
                   WRITE
                 </Link> </li>

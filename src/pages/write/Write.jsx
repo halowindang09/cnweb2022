@@ -3,25 +3,6 @@ import "./write.css";
 import { requestMgr } from "../../RequestMgr";
 import { CloseIcon } from '../../icon';
 
-function sendAddPost() {
-//   axios({
-//     url : process.env.REACT_APP_API_URL,
-//     method : "post",
-//     data : {
-//         "cmd" : 2,
-//         "excerpt" : document.getElementById("excerptInput"),
-//         "title" : document.getElementById("writeInput"),
-//         "content" : document.getElementById("writeInput writeText"),
-//     }
-// }).then(function (response) {
-//     console.log(response);
-// });
-  console.log(123);
-  let excerpt = "abc";
-  let title = "abc";
-  let content = "abc";
-  requestMgr.sendAddPost(excerpt, title, content);
-}
 export default function Write() {
   const [imgUrl, setImgUrl] = useState(null);
   const handleOnChange = e => {
@@ -42,6 +23,33 @@ export default function Write() {
       tagInput.current.value = '';
     }
   }
+  const [excerpt, setExcerpt] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [content, setContent] = useState(null);
+  const onChange = (e, type) => {
+    const value = e.target.value;
+    if (type === 'excerpt') setExcerpt(value);
+    else if (type === 'title') setTitle(value);
+    else if (type === 'content') setContent(value);
+  }
+  function sendAddPost() {
+      requestMgr.sendAddPost(excerpt, title, content).then(response => {
+      if (tags && tags.length > 0) {
+        Promise.all(
+          tags.map((tag, index) => {
+            return requestMgr.sendAddTag(tag.content);
+          })
+        ).then(_response => {
+          Promise.all(
+            _response.map((tagId, index) => {
+              return requestMgr.sendAddPostTag(tagId.data, response.data);
+            })
+          )
+        });
+      }
+      });
+
+  }
   return (
     <div className="write">
       <img
@@ -51,26 +59,25 @@ export default function Write() {
       />
       <form className="writeForm">
         <div className="writeFormGroup writeFormGroup_responsive">
-          <label htmlFor="fileInput">
-            <i className="writeIcon fas fa-plus"></i>
-          </label>
-          <input id="fileInput" multiple="false" type="file" style={{ display: "none" }} onChange={handleOnChange} />
           <input
             className="writeInput"
             placeholder="Title"
             type="text"
             autoFocus={true}
+            onChange={e => onChange(e, 'title')}
           />
           <input
             className="writeInput"
             placeholder="Excerpt"
             type="text"
             autoFocus={true}
+            onChange={e => onChange(e, 'excerpt')}
           />
-          <button id="btnSubmit" className="writeSubmit" type="submit" onClick={sendAddPost}>
-            SUBMIT
-          </button>
         </div>
+        <label htmlFor="fileInput">
+            <div className="add_image">Thêm ảnh <i className="writeIcon fas fa-plus"></i></div>
+        </label>
+        <input id="fileInput" multiple="false" type="file" style={{ display: "none" }} onChange={handleOnChange} />
         { imgUrl && (
           <div className="image_preview">
             <img src={imgUrl} alt="img_post"/>
@@ -107,9 +114,15 @@ export default function Write() {
             placeholder="Tell your story..."
             type="text"
             autoFocus={true}
+            onChange={e => onChange(e, 'content')}
           />
         </div>
       </form>
+      <div className="btn_submit">
+          <button id="btnSubmit" className="writeSubmit" type="button" onClick={sendAddPost}>
+            SUBMIT
+          </button>
+      </div>
     </div>
   );
 }

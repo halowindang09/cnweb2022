@@ -5,16 +5,17 @@ import Login from "./pages/login/Login";
 import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
 
-import { BrowserRouter as Router, Switch, Route, } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route,  useParams} from "react-router-dom";
 import About from "./pages/about/About";
 import { Register } from "./pages/register/register";
 import { Footer } from "./components/footer/footer";
 import './main.css';
 import { Profile } from "./pages/profile/profile";
 
-function App() {
+function App(props) {
   const [currentUser,setCurrentUser]=React.useState(false);
-  console.log(window.location.pathname)
+  // const { id } = useParams();
+  // console.log(id)
   return (
     <Router>
       <Topbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
@@ -32,7 +33,7 @@ function App() {
         </Route>
         <Route path="/write">{currentUser ? <Write /> : <Login setCurrentUser={setCurrentUser} />}</Route>
         <Route path="/profile">{currentUser ? <Profile /> : <Login setCurrentUser={setCurrentUser} />}</Route>
-        <Route path="/aboutme">
+        <Route path="/about">
             <About/>
         </Route>
       </Switch>

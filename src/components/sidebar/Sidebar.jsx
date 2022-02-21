@@ -18,7 +18,7 @@ export default function Sidebar() {
         </p>
       </div>
       <div className="sidebarItem">
-        <span className="sidebarTitle">CATEGORIES</span>
+        <span className="sidebarTitle">TAGS</span>
         <ul className="sidebarList">
           <li className="sidebarListItem">
             <Link className="link" to="/posts?cat=Life">
