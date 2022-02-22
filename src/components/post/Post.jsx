@@ -26,7 +26,7 @@ export default function Post({key, img, item}) {
         </div>
         <span className="postTitle">
           <Link to={{
-            pathname: `/post/${item.postId}`,
+            pathname: `/post/${item.postID}`,
             state: item
           }} className="link">
             {item.title}

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// let targetUrl = "http://2ac0-180-93-12-143.ngrok.io";
-let targetUrl = "http://localhost:2000";
+let targetUrl = "http://7207-14-231-124-1.ngrok.io";
+// let targetUrl = "http://localhost:2000";
 
 class RequestMgr {
     constructor() {
@@ -11,14 +11,12 @@ class RequestMgr {
     sendAddPost(excerpt, title, content) {
         console.log(excerpt, title, content);
         return axios({
-            url: targetUrl,
+            url: `${targetUrl}/posts/create`,
             method: "post",
             data: {
-                "cmd" : 2,
                 "excerpt": excerpt,
                 "title": title,
                 "content": content,
-                "slug": 'slug'
             }
         }).then(function (response) {
             console.log("here", response); 
@@ -28,10 +26,9 @@ class RequestMgr {
 
     sendAddTag(tagName) {
         return axios({
-            url: targetUrl,
+            url: `${targetUrl}/tags/create`,
             method: "post",
             data: {
-                "cmd": 1,
                 "tagName": tagName
             }
         }).then(function (response) {
@@ -42,10 +39,9 @@ class RequestMgr {
 
     sendAddPostTag(tagID, postID) {
         return axios({
-            url: targetUrl,
+            url: `${targetUrl}/posts/${postID}/add-tag`,
             method: "post",
             data: {
-                "cmd": 3,
                 "tagID": tagID,
                 "postID": postID
             }
@@ -54,12 +50,20 @@ class RequestMgr {
 
     getAllPost() {
         return axios({
-            url: targetUrl,
+            url: `${targetUrl}/posts`,
             method: "get",
             responseType: "json",
-            params: {
-                "cmd": 5 
-            }
+        }).then(function (response) {
+            console.log("here", response); 
+            return response.data;
+        });
+    }
+
+    getAllComment(postID) {
+        return axios({
+            url: `${targetUrl}/posts/${postID}/comments`,
+            method: "get",
+            responseType: "json",
         }).then(function (response) {
             console.log("here", response); 
             return response.data;
@@ -73,6 +77,19 @@ class RequestMgr {
             responseType: "json",
             params: {
                 "cmd": 7 
+            }
+        }).then(function (response) {
+            console.log("here", response); 
+            return response.data;
+        });
+    }
+
+    getRating(postID) {
+        return axios({
+            url: `${targetUrl}/posts/${postID}/avgrating`,
+            method: "post",
+            data: {
+                "postID": postID
             }
         }).then(function (response) {
             console.log("here", response); 

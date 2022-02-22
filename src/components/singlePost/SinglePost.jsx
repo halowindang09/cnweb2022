@@ -5,6 +5,7 @@ import "./singlePost.css";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { DeleteIcon, GrayStar, YellowStar } from '../../icon';
+import { requestMgr } from '../../RequestMgr';
 
 export default function SinglePost({id, data}) {
   const [listComment, setListComment] = useState([]);
@@ -12,48 +13,68 @@ export default function SinglePost({id, data}) {
   const [email, setEmail] = useState(null);
   const [content, setContent] = useState(null);
   const [error, setError] = useState(false);
+  const [appreciateNum, setAppreciateNum] = useState(null);
 
   const contentRef = useRef(null);
   const emailRef = useRef(null);
   const usernameRef = useRef(null);
   
+  useEffect(() => {
+    async function getAllComment() {
+      let data = await requestMgr.getAllComment(id);
+      let rating = await requestMgr.getRating(id);
+      rating = rating[0]["AVG(rate)"];
+      rating = Math.round(Number(rating));
+      console.log(rating)
+      setListComment(data);
+      setAppreciateNum(rating);
+    };
+    getAllComment();
+  } ,[]);
   const handleOnClick = e => {
+    console.log("id", id)
     if (username && email && content &&
       validateText(username) && validateText(email) &&  validateText(content)  
     ) {
-      setListComment([...listComment, {
-        id: listComment.length,
-        username,
-        email,
-        content
-      }]);
-      contentRef.current.value = null;
-      emailRef.current.value = null;
-      usernameRef.current.value = null;
-      setEmail(null);
-      setUsername(null);
-      setContent(null);
-      setError(false);
+      const data = JSON.stringify({
+        postID: id,
+        cmt: content,
+        email_cmt: email,
+        username
+      }); // truyền dữ liệu vào đây
       // AJAX
       const request = new XMLHttpRequest();
-      const url = ''; // nhập api ở đây
+      const url = `http://7207-14-231-124-1.ngrok.io/posts/${id}/create`; // nhập api ở đây
       request.open('POST', url, true);
       request.setRequestHeader("Content-Type", "application/json");
-      const data = JSON.stringify(''); // truyền dữ liệu vào đây
       request.onreadystatechange = function () {
         if (request.readyState === 4) {
           if (request.status === 200) {
             // thành công . Khi thành công mình làm gì tiếp theo thì làm ở đây
+            console.log("Comment OK");
+            setListComment([...listComment, {
+              id: listComment.length,
+              username,
+              email,
+              content
+            }]);
+            contentRef.current.value = null;
+            emailRef.current.value = null;
+            usernameRef.current.value = null;
+            setEmail(null);
+            setUsername(null);
+            setContent(null);
+            setError(false);
           }
           else {
-            // thất bại thì cần làm gì ??
+            // thất bại thì cần làm gì ??   
+            setError('Comment không thành công');
           }
         }
       };
-      request.send(data);
-    
+      request.send(data);    
     } else {
-        setError(true);
+        setError('Comment không hợp lệ');
     }};
   const handleOnChange = (e, type) => {
     const value = e.target.value;
@@ -69,12 +90,27 @@ export default function SinglePost({id, data}) {
     }
     return true;
   };
-  const deleteComment = (e, index) => {
-    setListComment(listComment.filter((item, _index) => index !== _index));
+  const deleteComment = (e, cmtID) => {
+          const data = JSON.stringify({ cmtID });
+          // AJAX
+          const request = new XMLHttpRequest();
+          const url = `http://7207-14-231-124-1.ngrok.io/posts/${id}/delete-comment`; // nhập api ở đây
+          request.open('POST', url, true);
+          request.setRequestHeader("Content-Type", "application/json");
+          request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+              if (request.status === 200) {
+                setListComment(listComment.filter((item, _index) => item.cmtID !== cmtID));
+              }
+              else {
+                // thất bại thì cần làm gì ??   
+              }
+            }
+          };
+          request.send(data);  
   };
 
   const [stars, setStars] = useState([false, false, false, false, false]);
-  const [appreciateNum, setAppreciateNum] = useState(2000);
 
   const formatNum = (num) => {
     if (num < 1000 && num > 0) return `${num}`;
@@ -82,13 +118,40 @@ export default function SinglePost({id, data}) {
     else return null;
   }
   const handleClickStar = (e, index) => {
-    if (index === 0 && stars[0] && !stars[1]) setStars([false, false, false, false, false]) // click sao thứ 1 khi đang ở 1 sao thì sẽ trở về chưa đánh giá
-    if (index === 0 && stars[0] && stars[1]) setStars([true, false, false, false, false]); // click sao thứ 1 khi đang ở 2 sao trở lên sẽ trở về 1 sao
-    if (index === 1) setStars([true, true, false, false, false]);
-    if (index === 2) setStars([true, true, true, false, false]);
-    if (index === 3) setStars([true, true, true, true, false]);
-    if (index === 4) setStars([true, true, true, true, true]);
-  }
+    let _stars = [false, false, false, false, false];
+    if (index === 0 && !stars[0]) _stars = [true, false, false, false, false] 
+    if (index === 0 && stars[0] && !stars[1]) _stars = [false, false, false, false, false] // click sao thứ 1 khi đang ở 1 sao thì sẽ trở về chưa đánh giá
+    if (index === 0 && stars[0] && stars[1]) _stars = [true, false, false, false, false]; // click sao thứ 1 khi đang ở 2 sao trở lên sẽ trở về 1 sao
+    if (index === 1) _stars = [true, true, false, false, false];
+    if (index === 2) _stars = [true, true, true, false, false];
+    if (index === 3) _stars = [true, true, true, true, false];
+    if (index === 4) _stars = [true, true, true, true, true];
+    setStars(_stars);
+    const rate = _stars.reduce((preValue, currValue) => { 
+      if (currValue) return preValue + 1;
+      else return preValue + 0;
+    }, 0);
+    console.log("rate", rate);
+    const data = JSON.stringify({
+      "postID": id,
+      "rate": rate
+    });
+    // AJAX
+    const request = new XMLHttpRequest();
+    const url = `http://7207-14-231-124-1.ngrok.io/posts/${id}/ratingcreate`; // nhập api ở đây
+    request.open('POST', url, true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.onreadystatechange = function () {
+      if (request.readyState === 4) {
+        if (request.status === 200) {
+          setStars(_stars);
+        } else {
+          // thất bại thì cần làm gì ??   
+        }
+      } 
+    }
+    request.send(data); 
+  };
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
@@ -140,9 +203,7 @@ export default function SinglePost({id, data}) {
         ))}
       </div>
       <div style={{ fontSize: '12px', marginLeft: '20px', marginBottom: '20px', fontFamily: 'monospace'}}>
-        { appreciateNum > 0 && (
-          formatNum(appreciateNum).concat(' đánh giá')
-        )}
+        { appreciateNum > 0 && (`Đánh giá trung bình: ${appreciateNum} sao`)}
       </div>
       <div className="comments_header">
         COMMENTS
@@ -164,7 +225,7 @@ export default function SinglePost({id, data}) {
                     {comment.content}
                   </div>
                   <div className="line"></div>
-                  <div className="delete_comment" onClick={e => deleteComment(e, index)}>
+                  <div className="delete_comment" onClick={e => deleteComment(e, comment.cmtID)}>
                     <DeleteIcon />
                   </div>
                 </div>
@@ -182,7 +243,7 @@ export default function SinglePost({id, data}) {
           <input ref={emailRef} type="email" id="email" onChange={e => handleOnChange(e, 'email')}/>
           { error && (
             <div style={{ fontSize: '15px', fontStyle: 'italic', color: 'red', margin: '2px 0px 10px 0px'}}>
-              Comment không hợp lệ
+              {error}
             </div>
           )}
           <button type="button" onClick={handleOnClick}>Send</button>
