@@ -13,25 +13,26 @@ export default function Posts() {
   useEffect(() => {
     const getAllPosts = async () => {
       let data = await requestMgr.getAllPost();
+      const _data = await requestMgr.getAllPostWithTag();
+      console.log(_data)
+      data = data.map(item => {
+        let newItem = item;
+        for (let _item of _data) {
+          if (newItem.postID === _item.postID) {
+            if (newItem.tags && newItem.tags.length > 0 ) {
+              const _tag = newItem.tags;
+              newItem = {
+                ...newItem,
+                tags: [..._tag, _item.tagName]
+              }
+            }
+            else newItem = { ...item, tags: [_item.tagName]}
+          }
+          else newItem = { ...item }
+        }
+        return newItem;
+      })
       console.log(data)
-      // const _data = await requestMgr.getAllPostWithTag();
-      // data = data.map(item => {
-      //   let newItem = item;
-      //   for (let _item of _data) {
-      //     if (newItem.postId === _item.postID) {
-      //       if (newItem.tags && newItem.tags.length > 0 ) {
-      //         const _tag = newItem.tags;
-      //         newItem = {
-      //           ...newItem,
-      //           tags: [..._tag, _item.tagName]
-      //         }
-      //       }
-      //       else newItem = { ...item, tags: [_item.tagName]}
-      //     }
-      //     else newItem = { ...item }
-      //   }
-      //   return newItem;
-      // })
       setAllPosts(data);
     };
     getAllPosts();

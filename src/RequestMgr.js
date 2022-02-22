@@ -72,7 +72,7 @@ class RequestMgr {
 
     getAllPostWithTag() {
         return axios({
-            url: targetUrl,
+            url: `${targetUrl}/posts/postsHasTag`,
             method: "get",
             responseType: "json",
             params: {
