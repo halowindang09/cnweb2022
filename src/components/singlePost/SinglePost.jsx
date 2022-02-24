@@ -41,7 +41,7 @@ export default function SinglePost({id, data}) {
         cmt: content,
         email_cmt: email,
         username
-      }); // truyền dữ liệu vào đây
+      }); 
       // AJAX
       const request = new XMLHttpRequest();
       const url = `http://7207-14-231-124-1.ngrok.io/posts/${id}/create`; // nhập api ở đây
@@ -50,7 +50,6 @@ export default function SinglePost({id, data}) {
       request.onreadystatechange = function () {
         if (request.readyState === 4) {
           if (request.status === 200) {
-            // thành công . Khi thành công mình làm gì tiếp theo thì làm ở đây
             console.log("Comment OK");
             setListComment([...listComment, {
               id: listComment.length,
@@ -67,7 +66,6 @@ export default function SinglePost({id, data}) {
             setError(false);
           }
           else {
-            // thất bại thì cần làm gì ??   
             setError('Comment không thành công');
           }
         }
@@ -82,7 +80,7 @@ export default function SinglePost({id, data}) {
     if (type === 'username') setUsername(value);
     if (type === 'content') setContent(value);
   }
-  const array = ['fuck', ]; // them vao day
+  const array = ['shoot', ]; 
   const validateText = text => {
     for(let element of array) {
       const regex = new RegExp(element, 'g');
@@ -103,7 +101,7 @@ export default function SinglePost({id, data}) {
                 setListComment(listComment.filter((item, _index) => item.cmtID !== cmtID));
               }
               else {
-                // thất bại thì cần làm gì ??   
+              
               }
             }
           };
@@ -120,8 +118,8 @@ export default function SinglePost({id, data}) {
   const handleClickStar = (e, index) => {
     let _stars = [false, false, false, false, false];
     if (index === 0 && !stars[0]) _stars = [true, false, false, false, false] 
-    if (index === 0 && stars[0] && !stars[1]) _stars = [false, false, false, false, false] // click sao thứ 1 khi đang ở 1 sao thì sẽ trở về chưa đánh giá
-    if (index === 0 && stars[0] && stars[1]) _stars = [true, false, false, false, false]; // click sao thứ 1 khi đang ở 2 sao trở lên sẽ trở về 1 sao
+    if (index === 0 && stars[0] && !stars[1]) _stars = [false, false, false, false, false] 
+    if (index === 0 && stars[0] && stars[1]) _stars = [true, false, false, false, false]; 
     if (index === 1) _stars = [true, true, false, false, false];
     if (index === 2) _stars = [true, true, true, false, false];
     if (index === 3) _stars = [true, true, true, true, false];
@@ -146,7 +144,6 @@ export default function SinglePost({id, data}) {
         if (request.status === 200) {
           setStars(_stars);
         } else {
-          // thất bại thì cần làm gì ??   
         }
       } 
     }
@@ -233,11 +230,11 @@ export default function SinglePost({id, data}) {
            })
          )}
       </div>
-      <h3 className="comment-reply-title">Leave a Reply </h3>
+      <h3 className="comment-reply-title">Để lại bình luận</h3>
       <div className="single-post-cmt">
         <form className="single-post-cmt-form">
           <textarea ref={contentRef} id="cmt" placeholder="Write your comment here" onChange={e => handleOnChange(e, 'content')}/>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Họ Tên</label>
           <input ref={usernameRef} type="text" id="name" onChange={e => handleOnChange(e, 'username')}/>
           <label htmlFor="email">Email</label>
           <input ref={emailRef} type="email" id="email" onChange={e => handleOnChange(e, 'email')}/>
@@ -249,9 +246,8 @@ export default function SinglePost({id, data}) {
           <button type="button" onClick={handleOnClick}>Send</button>
         </form>
       </div>
-      {/* <form action></form>  */}
     </div>
   );
 }
 
-// gửi dữ liệu cụ thể từng bài từ database về.
+

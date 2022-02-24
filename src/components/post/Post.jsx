@@ -35,12 +35,7 @@ export default function Post({key, img, item}) {
         <hr />
         <span className="postDate">1 hour ago</span>
       </div>
-      {/* <p className="postDesc">
-        {item.content}
-      </p> */}
-     
     </div>
     
   );
 }
-// Hien thi trang bai viet

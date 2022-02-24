@@ -52,19 +52,8 @@ export default function Sidebar() {
           </li>
         </ul>
       </div>
-      {/* <div className="sidebarItem">
-        <span className="sidebarTitle">FOLLOW US</span>
-        <div className="sidebarSocial">
-          <i className="sidebarIcon fab fa-facebook-square"></i>
-          <i className="sidebarIcon fab fa-instagram-square"></i>
-          <i className="sidebarIcon fab fa-pinterest-square"></i>
-          <i className="sidebarIcon fab fa-twitter-square"></i>
-        </div>
-      </div> */}
     </div>
   );
 }
 
-// Chỉnh sửa ngắn cho để hiện thị những các phân loại.
-// 1 tác giả nên không cần link bài viết cho user
-// hiển thị bài viết có ở  cat nào.
+

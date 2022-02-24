@@ -44,7 +44,7 @@ export const Footer = () => {
                         <br/>
                         <p>Số điện thoại: +84 912 567 890</p>
                         <br/>
-                        <p>Facebook: facebook.com/hihi</p>
+                        <p>Facebook: facebook.com/</p>
                     </div>
                 </div>
             </div>

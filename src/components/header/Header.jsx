@@ -5,13 +5,9 @@ export default function Header() {
   return (
     <div className="header">
       <div className="headerTitles">
-        <span> My Daily Blog </span>
-        <span> Team 11</span>
+        <span> My Personal Blog </span>
+        <span> Team 3</span>
         <div className="HeaderIcon">
-        {/* <i className="topIcon fab fa-facebook-square"></i>
-        <i className="topIcon fab fa-instagram-square"></i>
-        <i className="topIcon fab fa-pinterest-square"></i>
-        <i className="topIcon fab fa-twitter-square"></i> */}
       </div>
       </div>
       <img

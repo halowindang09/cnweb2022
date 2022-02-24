@@ -15,7 +15,7 @@ export const Profile = () => {
         if (type === 'password_2') setPassword_2(value);
     };
 
-    // nếu dữ liệu trống thì mặc định là theo giá trị cũ
+  
     const handleClick = e => {
 
     };
