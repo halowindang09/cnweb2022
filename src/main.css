@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@300&family=Praise&family=Roboto:wght@100;300&family=Yuji+Syuku&family=Zen+Antique&display=swap');
 
 html, body {
-    /* font-family: 'Montagu Slab', serif !important;
-    font-family: 'Praise', cursive !important; */
+    
     font-family: 'Roboto', sans-serif !important;
-    /* font-family: 'Yuji Syuku', serif !important;
-    font-family: 'Zen Antique', serif !important; */
+   
 }
 #root {
     /* min-width: 990px; */
